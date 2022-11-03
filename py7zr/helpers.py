@@ -21,6 +21,7 @@
 #
 #
 import ctypes
+import hashlib
 import os
 import pathlib
 import platform
@@ -29,8 +30,6 @@ import time as _time
 import zlib
 from datetime import datetime, timedelta, timezone, tzinfo
 from typing import BinaryIO, List, Optional, Union
-
-import hashlib
 
 import py7zr.win32compat
 from py7zr import Bad7zFile
@@ -57,7 +56,7 @@ def calculate_crc32(data: bytes, value: int = 0, blocksize: int = 1024 * 1024) -
 def _get_hash(digest: str):
     if digest not in hashlib.algorithms_available:
         raise ValueError("Unknown digest method for password protection.")
-    if digest == 'sha256':
+    if digest == "sha256":
         return hashlib.sha256()
     return hashlib.new(digest)
 
